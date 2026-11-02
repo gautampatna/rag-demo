@@ -1,0 +1,13 @@
+My Name is Gautam.
+I am a Software Engineer.
+Graduation: ECE
+
+Work History:
+- Joined TCS in June 2022
+- Joined AEMO in March 2023
+
+Tech Stack: Python, PySpark, Azure Databricks, LangChain, Cosmos DB
+Current Location: Kolkata
+Role: Data Engineer
+
+Education: B.Tech in Electronics and Communication Engineering (ECE)
