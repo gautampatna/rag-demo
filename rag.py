@@ -11,9 +11,9 @@ from langchain_core.runnables import RunnablePassthrough
 
 # --- Configuration ---
 DOCS_DIR = "./documents"          # Put your PDFs and files here
-CHROMA_DIR = "./chroma_db_rag"        # Where vectors are saved
+CHROMA_DIR = "./chroma_db_rag"    # Where vectors are saved
 EMBED_MODEL = "nomic-embed-text"  # Embedding model
-CHAT_MODEL = "llama3.2:3b"        # Chat model (adjust to your hardware)
+CHAT_MODEL = "llama3.2:3b"        # Chat model
 CHUNK_SIZE = 1000                 # Characters per chunk
 CHUNK_OVERLAP = 200               # Overlap between chunks
 
@@ -21,25 +21,12 @@ def build_vector_store():
     """Load documents, chunk them, embed them, and store them in ChromaDB."""
 
     print(f"Loading documents from {DOCS_DIR}/ ...")
-    # NEW - works for all PDFs
-    from langchain_community.document_loaders import PyMuPDFLoader
 
     pdf_loader = DirectoryLoader(
         DOCS_DIR,
         glob="**/*.pdf",
         loader_cls=PyMuPDFLoader,
     )
-    # # Load PDFs
-    # pdf_loader = DirectoryLoader(
-    #     DOCS_DIR,
-    #     glob="**/*.pdf",
-    #     loader_cls=UnstructuredPDFLoader,
-    #     loader_kwargs={"strategy": "fast"}
-    # )
-    # Load markdown and text files (one loader per pattern, because
-    # the glob pattern does not support {txt,md} brace syntax)
-    # md_loader = DirectoryLoader(DOCS_DIR, glob="**/*.md")
-    # txt_loader = DirectoryLoader(DOCS_DIR, glob="**/*.txt")
 
     txt_loader = DirectoryLoader(
         DOCS_DIR,
@@ -143,5 +130,5 @@ if __name__ == "__main__":
                 answer = query_documents(store, question)
                 print(f"A: {answer}\n")
             except KeyboardInterrupt:
-                print("\nGoodbye.")
+                print("\nThank you!.")
                 break
